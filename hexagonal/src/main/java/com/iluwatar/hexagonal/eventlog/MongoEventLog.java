@@ -1,6 +1,6 @@
 /**
  * The MIT License
- * Copyright (c) 2014 Ilkka Seppälä
+ * Copyright (c) 2014-2016 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -105,7 +105,7 @@ public class MongoEventLog implements LotteryEventLog {
     Document document = new Document("email", details.getEmail());
     document.put("phone", details.getPhoneNumber());
     document.put("bank", details.getBankAccount());
-    document.put("message", String.format("Lottery ticket was submitted and bank account was charged for 3 credits."));
+    document.put("message", "Lottery ticket was submitted and bank account was charged for 3 credits.");
     eventsCollection.insertOne(document);
     stdOutEventLog.ticketSubmitted(details);
   }
@@ -115,7 +115,7 @@ public class MongoEventLog implements LotteryEventLog {
     Document document = new Document("email", details.getEmail());
     document.put("phone", details.getPhoneNumber());
     document.put("bank", details.getBankAccount());
-    document.put("message", String.format("Lottery ticket could not be submitted because lack of funds."));
+    document.put("message", "Lottery ticket could not be submitted because lack of funds.");
     eventsCollection.insertOne(document);
     stdOutEventLog.ticketSubmitError(details);
   }
@@ -125,7 +125,7 @@ public class MongoEventLog implements LotteryEventLog {
     Document document = new Document("email", details.getEmail());
     document.put("phone", details.getPhoneNumber());
     document.put("bank", details.getBankAccount());
-    document.put("message", String.format("Lottery ticket was checked and unfortunately did not win this time."));
+    document.put("message", "Lottery ticket was checked and unfortunately did not win this time.");
     eventsCollection.insertOne(document);
     stdOutEventLog.ticketDidNotWin(details);
   }

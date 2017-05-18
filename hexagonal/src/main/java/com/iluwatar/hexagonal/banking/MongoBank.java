@@ -1,6 +1,6 @@
 /**
  * The MIT License
- * Copyright (c) 2014 Ilkka Seppälä
+ * Copyright (c) 2014-2016 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,7 @@ import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Mongo based banking adapter
@@ -110,7 +111,7 @@ public class MongoBank implements WireTransfers {
   @Override
   public int getFunds(String bankAccount) {
     Document search = new Document("_id", bankAccount);
-    ArrayList<Document> results = accountsCollection.find(search).limit(1).into(new ArrayList<Document>());
+    List<Document> results = accountsCollection.find(search).limit(1).into(new ArrayList<Document>());
     if (results.size() > 0) {
       return results.get(0).getInteger("funds");
     } else {
